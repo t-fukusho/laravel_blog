@@ -71,6 +71,42 @@ class ArticleSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'user_id' => 1,
+                'category_id' => 5,
+                'title' => 'test5',
+                'content' => 'test5',
+                'is_variable' => false,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 3,
+                'category_id' => 4,
+                'title' => 'test4',
+                'content' => 'test4',
+                'is_variable' => false,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 2,
+                'category_id' => 3,
+                'title' => 'test5',
+                'content' => 'testeqeqeしています。',
+                'is_variable' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'user_id' => 6,
+                'category_id' => 1,
+                'title' => 'test6',
+                'content' => 'test6',
+                'is_variable' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
