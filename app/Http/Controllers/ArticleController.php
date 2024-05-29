@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Models\Article;
+
 class ArticleController extends Controller
 {
 
@@ -89,5 +89,5 @@ class ArticleController extends Controller
         // return view('blog.index', compact('articles'));
     }
 
-    
+
 }
