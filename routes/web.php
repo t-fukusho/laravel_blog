@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\MyArticleController;
+use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/blog/mypage/{id}', [MypageController::class, 'show'])->name('mypage.show');
+    Route::get('/blog/my_article_list/{id}', [MyArticleController::class, 'index'])->name('myArticle.index');
+    Route::get('/blog/like_list/{id}', [LikeController::class, 'index'])->name('like.index');
+});
 require __DIR__.'/auth.php';
