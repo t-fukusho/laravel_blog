@@ -1,0 +1,129 @@
+.articles-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+}
+
+.article {
+    min-width: 200px;
+    flex: 0 0 auto;
+    /* Prevent articles from shrinking */
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.button {
+    display: inline-block;
+    border-radius: 5%;
+    font-size: 14pt;
+    text-align: center;
+    cursor: pointer;
+    padding: 12px 12px;
+    background: #1a85ff;
+    color: #ffffff;
+    line-height: 1em;
+    transition: .3s;
+
+    border: 2px solid #54a4ff;
+}
+
+.button:hover {
+    box-shadow: none;
+    color: #1a85ff;
+    background: #ffffff;
+}
+
+
+/* 検索ボックス（コピペ） */
+.search-form-4 {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #777777;
+    border-radius: 3px;
+}
+
+.search-form-4 input {
+    width: 250px;
+    height: 45px;
+    padding: 5px 15px 5px 0;
+    border: none;
+    box-sizing: border-box;
+    font-size: 1em;
+    outline: none;
+}
+
+.search-form-4 input::placeholder {
+    color: #777777;
+}
+
+.search-form-4 button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.search-form-4 button::before {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z' fill='%23777777'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    content: '';
+}
+
+
+/* 横スクロール */
+.Container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.Box-Container {
+    display: flex;
+    width: fit-content;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+}
+
+.Box {
+    flex-shrink: 0;
+    width: 300px;
+    height: 200px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background-color: #ccc;
+}
+
+.Arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Arrow.left {
+    left: 0;
+}
+
+.Arrow.right {
+    right: 0;
+}
+
+.Hide {
+    display: none;
+}
