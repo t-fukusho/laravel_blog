@@ -48,7 +48,7 @@ class ArticleController extends Controller
         $article->title = $request->input('title');
         $article->content = $request->input('content');
         $article->save();
-        return view('article.show', compact('article'));
+        return redirect()->route('article.show', $article->id);
     }
     public function like(string $id)
         {
