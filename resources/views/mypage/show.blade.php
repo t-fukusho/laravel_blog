@@ -8,9 +8,11 @@
             <li><a href="/blog/article/{{ $article->id }}">{{ $article->content }}</a></li>
         </ul>
     @endforeach
+    @if (count($articles) >= 9)
         <ul>
             <li><a href="/blog/my_article_list/{{$id}}">もっと見る</a></li>
         </ul>
+    @endif
 
 <h3>いいねした記事</h3>
     @foreach ($likes as $like)
@@ -19,7 +21,8 @@
             <li><a href="/blog/article/{{ $article->id }}">{{ $like->content }}</a></li>
         </ul>
     @endforeach
+    @if (count($likes) >= 9)
         <ul>
             <li><a href="/blog/like_list/{{$id}}">もっと見る</a></li>
         </ul>
-
+    @endif
