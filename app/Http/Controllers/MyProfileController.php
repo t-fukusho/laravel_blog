@@ -63,11 +63,11 @@ class MyProfileController extends Controller
 
             DB::commit(); // トランザクションのコミット
 
-            return redirect()->route('home')->with('success', 'アカウントが削除されました');
+            return redirect()->route('login')->with('success', 'アカウントが削除されました');
         } catch (\Exception $e) {
             DB::rollBack(); // トランザクションのロールバック
 
-            return redirect()->route('home')->with('error', 'アカウントの削除に失敗しました: ' . $e->getMessage());
+            return redirect()->route('login')->with('error', 'アカウントの削除に失敗しました: ' . $e->getMessage());
         }
     }
 }

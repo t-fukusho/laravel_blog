@@ -6,9 +6,11 @@ use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\ArticleController;
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\MyProfileController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,7 +34,7 @@ Route::post('/blog/article/{id}', [ArticleController::class, 'update'])->name('a
 Route::post('/blog/article/{id}', [ArticleController::class, 'like'])->name('article.like');
 
 Route::middleware('auth')->group(function () {
-Route::resource('blog', ArticleController::class);
+    Route::resource('blog', ArticleController::class);
 });
 
 
@@ -40,15 +42,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/blog/mypage/{id}', [MypageController::class, 'show'])->name('mypage.show');
     Route::get('/blog/my_article_list/{id}', [MyArticleController::class, 'index'])->name('myArticle.index');
     Route::get('/blog/like_list/{id}', [LikeController::class, 'index'])->name('like.index');
+    // プロフィール編集画面
+    Route::get('/blog/mypage/{id}/edit', [MyProfileController::class, 'edit'])->name('myprofile.edit');
+    // プロフィール更新
+    Route::post('/blog/mypage/{id}/edit', [MyProfileController::class, 'update'])->name('myprofile.update');
+    // アカウント削除
+    Route::delete('/blog/mypage/{id}', [MyProfileController::class, 'destroy'])->name('myprofile.destroy');
 });
 
-// プロフィール編集画面
-Route::get('/blog/mypage/{id}/edit', [MyProfileController::class, 'edit'])->name('myprofile.edit');
-// プロフィール更新
-Route::post('/blog/mypage/{id}/edit', [MyProfileController::class, 'update'])->name('myprofile.update');
-// アカウント削除
-Route::delete('/blog/mypage/{id}', [MyProfileController::class, 'destroy'])->name('myprofile.destroy');
+// // プロフィール編集画面
+// Route::get('/blog/mypage/{id}/edit', [MyProfileController::class, 'edit'])->name('myprofile.edit');
+// // プロフィール更新
+// Route::post('/blog/mypage/{id}/edit', [MyProfileController::class, 'update'])->name('myprofile.update');
+// // アカウント削除
+// Route::delete('/blog/mypage/{id}', [MyProfileController::class, 'destroy'])->name('myprofile.destroy');
 
 require __DIR__ . '/auth.php';
-
-
