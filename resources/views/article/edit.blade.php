@@ -1,7 +1,7 @@
 <h1>resources/views/article/edit.blade.php</h1>
 <div class="article">
     <h1>{{ $article->title }}</h1>
-    <form action="{{ route('article.update', ['id' => $article->id]) }}" method="POST">
+    <form action="{{ route('article.update', $article->id) }}" method="POST">
         <p>タイタル</p>
         <div class="form-group">
             <textarea class="form-control" name="title" rows="1">{{ $article->title }}</textarea>

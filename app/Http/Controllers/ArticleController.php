@@ -38,13 +38,12 @@ class ArticleController extends Controller
     public function edit(string $id = null)
     {
         $article = Article::findOrFail($id);
-
+        //dd($article);
         return view('article.edit', compact('article'));
     }
     public function update(Request $request, $id)
     {
         $article = Article::findOrFail($id);
-
         $article->title = $request->input('title');
         $article->content = $request->input('content');
         $article->save();

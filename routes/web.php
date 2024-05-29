@@ -18,13 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//Article
-//article.show
+
 Route::get('/blog/article/{id}', [ArticleController::class, 'show'])->name('article.show');
-//article.edit
 Route::post('/blog/article/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
-//article.update
 Route::post('/blog/article/{id}', [ArticleController::class, 'update'])->name('article.update');
-//article.like
 Route::post('/blog/article/{id}', [ArticleController::class, 'like'])->name('article.like');
 require __DIR__.'/auth.php';
