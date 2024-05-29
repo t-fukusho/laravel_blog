@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
+    protected $table = 'likes';
+
+   
     use HasFactory;
 
     protected $fillable = [
@@ -19,4 +22,5 @@ class Like extends Model
     {
         return $this->belongsTo(Article::class);
     }
+
 }
