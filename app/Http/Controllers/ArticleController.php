@@ -7,9 +7,10 @@ use App\Models\User;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Models\Article;
 class ArticleController extends Controller
 {
+
     public function show(Request $request, string $id = null){
         $articles = Article::where('is_variable', true)->get();
         if ($request->has('show')) {
@@ -63,4 +64,30 @@ class ArticleController extends Controller
             return view('article.show',compact('article'));
         }
 
+    //
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
+    {
+        if (isset($request->keyword)) {
+            $articles = Article::
+                where('title','like','%'.$request->keyword.'%')
+                ->orWhere('content', 'like','%'.$request->keyword.'%')
+                ->withCount('likes')
+                ->paginate(10);;
+            }
+        else {
+            $articles = Article::withCount('likes')->paginate(10);
+        }
+
+        return view('blog.index', [
+            'articles' => $articles,
+            'keyword' => $request->keyword
+        ]);
+        // $articles = Article::all();
+        // return view('blog.index', compact('articles'));
+    }
+
+    
 }

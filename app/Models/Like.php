@@ -9,9 +9,18 @@ class Like extends Model
 {
     protected $table = 'likes';
 
-    // Define the fillable attributes
-    protected $fillable = ['user_id', 'article_id'];
-
+   
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'article_id',
+    ];
+
+    // Articleリレーションシップ
+    public function article()
+    {
+        return $this->belongsTo(Article::class);
+    }
 
 }
