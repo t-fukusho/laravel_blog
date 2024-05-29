@@ -26,7 +26,7 @@ use Illuminate\Support\Str;
     <div class="Box-Container">
         @foreach ($articles as $article)
             <div class="article">
-                <h2>{{ $article->title }}</h2>
+                <h2><a href="{{ route('article.show', $article->id) }}">{{ $article->title }}</a></h2>
                 <p>{{ Str::limit($article->content, 30, '...') }}</p>
                 <p>いいね: {{ $article->likes_count }}</p>
             </div>
