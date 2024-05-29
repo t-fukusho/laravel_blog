@@ -2,24 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Termwind\Components\Raw;
 
-class LikeController extends Controller
+class MypageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
-        $likes = Like::join('articles', 'article_id', '=', 'articles.id')
-                    ->select("articles.id","articles.title", DB::Raw("SUBSTRING(articles.content, 1, 10) as content"))
-                    ->where("likes.user_id",$id)
-                    ->orderBy('likes.updated_at', 'desc')
-                    ->get();
-
-        return view('like.index',compact("id","likes"));
+        //
     }
 
     /**
@@ -41,9 +37,22 @@ class LikeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $articles = Article::select("id","title",DB::Raw("SUBSTRING(content, 1, 10) as content"))
+                            ->where("user_id",$id)
+                            ->orderBy('updated_at', 'desc')
+                            ->limit(9)
+                            ->get();
+
+        $likes = Like::join('articles', 'article_id', '=', 'articles.id')
+                    ->select("articles.id","articles.title", DB::Raw("SUBSTRING(articles.content, 1, 10) as content"))
+                    ->where("likes.user_id",$id)
+                    ->orderBy('likes.updated_at', 'desc')
+                    ->limit(9)
+                    ->get();
+
+        return view('mypage.show',compact("id","articles","likes"));
     }
 
     /**

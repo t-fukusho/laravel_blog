@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Like;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class LikeController extends Controller
+class MyArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index($id)
     {
-        $likes = Like::join('articles', 'article_id', '=', 'articles.id')
-                    ->select("articles.id","articles.title", DB::Raw("SUBSTRING(articles.content, 1, 10) as content"))
-                    ->where("likes.user_id",$id)
-                    ->orderBy('likes.updated_at', 'desc')
-                    ->get();
+        $articles = Article::select("id","title",DB::Raw("SUBSTRING(content, 1, 10) as content"))
+                            ->where("user_id",$id)
+                            ->orderBy('updated_at', 'desc')
+                            ->get();
 
-        return view('like.index',compact("id","likes"));
+        return view('myArticle.index',compact("id","articles"));
     }
 
     /**
