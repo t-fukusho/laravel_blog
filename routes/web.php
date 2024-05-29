@@ -27,12 +27,12 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-Route::get('/blog/article/{id}', [ArticleController::class, 'show'])->name('article.show');
-Route::post('/blog/article/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
-Route::post('/blog/article/{id}', [ArticleController::class, 'update'])->name('article.update');
-Route::post('/blog/article/{id}', [ArticleController::class, 'like'])->name('article.like');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/blog/article/{id}', [ArticleController::class, 'show'])->name('article.show');
+    Route::post('/blog/article/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::post('/blog/article/{id}/update', [ArticleController::class, 'update'])->name('article.update');
+    Route::post('/blog/article/{id}', [ArticleController::class, 'like'])->name('article.like');
+});
 Route::middleware('auth')->group(function () {
     Route::resource('blog', ArticleController::class);
 });
