@@ -9,7 +9,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Category;
 use App\Models\Like;
-
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,7 +30,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
         // カテゴリを10個作成
         // Category::factory(10)->create();
-        Category::class,
+        CategorySeeder::class,
+        ArticleSeeder::class,
+        CommentSeeder::class,
+        LikeSeeder::class,
         ]);
         // 投稿を100件作成
         // Article::factory(100)->create();

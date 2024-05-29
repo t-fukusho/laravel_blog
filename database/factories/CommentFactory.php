@@ -14,7 +14,7 @@ class CommentFactory extends Factory
         return [
             'user_id' => User::factory(),
             'article_id' => Article::factory(),
-            'comment' => $this->faker->sentence,
+            'comment' => fake()->sentence(),
         ];
     }
 }
