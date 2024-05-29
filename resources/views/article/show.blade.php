@@ -9,7 +9,7 @@
     <button type="submit" class="btn btn-primary">編集</button>
     @csrf
 </form>
-<form action="" method="POST">
+<form action="{{ route('article.like', ['id' => $article->id]) }}" method="POST">
     <button type="submit" class="btn btn-primary">いいね</button>
     @csrf
 </form>

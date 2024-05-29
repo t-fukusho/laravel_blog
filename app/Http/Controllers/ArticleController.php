@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\User;
-
+use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -23,8 +24,7 @@ class ArticleController extends Controller
         else{
             $article = Article::find($id); // Assuming $showTerm contains the ID of the article
             if ($article) {
-                $comments = $article->comments; // Retrieve comments associated with the article
-                return view('article.show', compact('article', 'comments'));
+                return view('article.show', compact('article'));
             } else {
                 abort(404); // Article not found
             }
@@ -50,5 +50,18 @@ class ArticleController extends Controller
         $article->save();
         return view('article.show', compact('article'));
     }
+    public function like(string $id)
+        {
+            $user = Auth::user();
+            $user_id = $user->id;
+            $like = new Like();
+            $like->user_id = $user_id;
+            $like->article_id = $id;
+            $like->save();
+
+            $article = Article::findOrFail($id);
+
+            return view('article.show',compact('article'));
+        }
 
 }
