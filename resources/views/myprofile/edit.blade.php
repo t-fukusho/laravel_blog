@@ -1,5 +1,4 @@
 {{-- プロフィール編集画面 --}}
-
 <div class="container">
     <h1>プロフィール編集</h1>
 
@@ -46,7 +45,7 @@
     {{-- アカウント削除フォーム --}}
     <form action="{{ route('myprofile.destroy', $user->id) }}" method="POST" style="margin-top: 20px;">
         @csrf
-        @method('DELETE');
+        @method('DELETE')
         {{-- 削除ボタン --}}
         <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">アカウント削除</button>
     </form>
