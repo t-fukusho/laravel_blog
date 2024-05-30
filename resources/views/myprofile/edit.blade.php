@@ -21,14 +21,24 @@
     @endif
 
     {{-- プロフィール編集フォーム --}}
+
+    {{-- 設定されたアイコンの表示 --}}
+    @if ($user->icon_path)
+        <div class="user-icon">
+            <h3>現在のアイコン</h3>
+            {{-- アイコン画像を表示。storageパスを正しく設定してください。 --}}
+            {{-- {{ dd($user) }} --}}
+            <img src="{{ asset('' . $user->icon_path) }}" alt="ユーザーアイコン" style="width: 100px; height: 100px;">
+        </div>
+    @endif
     <form action="{{ route('myprofile.update', $user->id) }}" method="POST">
         @csrf
         {{-- @method('put') --}}
         {{-- 名前入力フィールド --}}
         <div class="form-group">
             <label for="name">ユーザー名</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}"
-                required>
+            <input type="text" name="name" id="name" class="form-control"
+                value="{{ old('name', $user->name) }}" required>
         </div>
 
         {{-- パスワード入力フィールド（任意） --}}
@@ -37,9 +47,15 @@
             <label for="password">パスワード（変更する場合のみ）</label>
             <input type="password" name="password" id="password" class="form-control">
         </div>
-
         {{-- 更新ボタン --}}
         <button type="submit" class="btn btn-primary">更新</button>
+    </form>
+
+    {{-- アイコンの編集 --}}
+    <form action="{{ route('myprofile.icon_update', $user->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="icon">
+        <button type="submit">Upload</button>
     </form>
 
     {{-- アカウント削除フォーム --}}
