@@ -1,18 +1,3 @@
-.articles-container {
-    display: flex;
-    overflow-x: auto;
-    padding: 20px;
-}
-
-.article {
-    min-width: 200px;
-    flex: 0 0 auto;
-    /* Prevent articles from shrinking */
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 5px;
-}
-
 .button {
     display: inline-block;
     border-radius: 5%;
@@ -98,7 +83,7 @@
     height: 200px;
     margin-right: 10px;
     border-radius: 10px;
-    background-color: #ccc;
+
 }
 
 .Arrow {
@@ -127,3 +112,43 @@
 .Hide {
     display: none;
 }
+
+.box-container {
+    display: flex;
+
+    margin: 20px;
+}
+
+.box {
+    border: 1px solid #ddd;
+
+    border-radius: 5px;
+}
+
+
+
+
+/* サイドバー */
+
+
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+}
+
+html {
+    height: -webkit-fill-available;
+}
+
+main {
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.dropdown-toggle {
+    outline: 0;
+}
+

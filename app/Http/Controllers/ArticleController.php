@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
@@ -70,20 +71,28 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request->keyword)) {
-            $articles = Article::
+        $query = Article::query();
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+        else if (isset($request->keyword)) {
+            $query->
                 where('title','like','%'.$request->keyword.'%')
                 ->orWhere('content', 'like','%'.$request->keyword.'%')
                 ->withCount('likes')
                 ->paginate(10);;
             }
-        else {
-            $articles = Article::withCount('likes')->paginate(10);
-        }
 
+
+        $articles =  $query->withCount('likes')->paginate(10);
+
+        $id = Auth::id();
+        $categories = Category::all();
         return view('blog.index', [
             'articles' => $articles,
-            'keyword' => $request->keyword
+            'keyword' => $request->keyword,
+            'id' => $id,
+            'categories' => $categories,
         ]);
         // $articles = Article::all();
         // return view('blog.index', compact('articles'));
