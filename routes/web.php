@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/blog/article/{id}', [ArticleController::class, 'show'])->name('article.show');
+    Route::post('/blog/article/{id}/back', [ArticleController::class, 'goBack'])->name('article.back');
     Route::post('/blog/article/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
     Route::post('/blog/article/{id}/update', [ArticleController::class, 'update'])->name('article.update');
     Route::post('/blog/article/{id}/like', [LikeController::class, 'store'])->name('like.store');
