@@ -10,10 +10,19 @@
     <p>投稿日: {{ $article->created_at}}</p>
     <p>更新日: {{ $article->updated_at}}</p>
 </div>
-<form action="{{ route('article.edit', ['id' => $article->id]) }}" method="POST">
-    <button type="submit" class="btn btn-primary">編集</button>
-    @csrf
-</form>
+@if(Auth::check() && $article->user_id == Auth::user()->id)
+    <form action="{{ route('article.edit', ['id' => $article->id]) }}" method="POST">
+        <button type="submit" class="btn btn-primary">編集</button>
+        @csrf
+    </form>
+    <form action="{{ route('article.destroy', ['id' => $article->id]) }}" method="POST" id="deleteForm">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger"
+                onclick="return confirm('本当に削除しますか？\r\nあなたの書いた記事が削除されます。\r\nこの操作は取り消せません。')">削除</button>
+    </form>
+@endif
+
 <form action="{{ route('like.store', ['id' => $article->id]) }}" method="POST">
     <button type="submit" class="btn btn-primary">いいね</button>
     @csrf
