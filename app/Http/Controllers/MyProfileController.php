@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Article;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class MyProfileController extends Controller
 {
@@ -35,13 +36,29 @@ class MyProfileController extends Controller
         }
         $user = User::findOrFail($id);
         // dd($user);
+
+        //passwordと名前の変更処理
         $user->update([
             'name' => $request->name,
             // パスワードが入力された場合のみ更新
             'password' => $request->password ? Hash::make($request->password) : $user->password,
+
         ]);
 
         return redirect()->route('myprofile.edit', $id)->with('success', 'プロフィールが更新されました。');
+    }
+    public function icon_update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        // dd($user);
+        //アイコンのファイルがアップロードされたら保存処理を行う
+        if ($request->hasFile('icon')) {
+            $fileName = $request->file('icon')->store('public/icons');
+            $user->icon_path = Storage::url($fileName);
+        }
+        // dd($user);
+        $user->save();
+        return redirect()->route('myprofile.edit', $id)->with('success', 'プロフィールアイコンが更新されました。');
     }
 
     // アカウントを削除するためのメソッド
@@ -66,7 +83,6 @@ class MyProfileController extends Controller
             return redirect()->route('login')->with('success', 'アカウントが削除されました');
         } catch (\Exception $e) {
             DB::rollBack(); // トランザクションのロールバック
-
             return redirect()->route('login')->with('error', 'アカウントの削除に失敗しました: ' . $e->getMessage());
         }
     }
