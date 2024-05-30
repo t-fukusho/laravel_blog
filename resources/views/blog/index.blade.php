@@ -65,7 +65,7 @@
                                     <p>{{ Str::limit($article->content, 30, '...') }}</p>
                                     <div class="user-icon">
                                         <p><img src="{{ $article->user->icon_path }}" alt="ユーザーアイコン">
-                                            {{ $article->user->name }} ⭐️{{ $article->likes_count }}</p>
+                                            {{ $article->user->name }}　&#9825;{{ $article->likes_count }}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -90,7 +90,7 @@
                                     <p>{{ Str::limit($article2->content, 30, '...') }}</p>
                                     <div class="user-icon">
                                         <p><img src="{{ $article2->user->icon_path }}" alt="ユーザーアイコン">
-                                            {{ $article2->user->name }}　⭐️{{ $article2->likes_count }}</p>
+                                            {{ $article2->user->name }}　&#9825;{{ $article2->likes_count }}</p>
                                     </div>
                                 </div>
                             @endforeach
