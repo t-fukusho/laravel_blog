@@ -16,11 +16,16 @@ class LikeController extends Controller
      */
     public function index($id)
     {
-        $likes = Like::join('articles', 'article_id', '=', 'articles.id')
-                    ->select("articles.id","articles.title","content")
-                    ->where("likes.user_id",$id)
-                    ->orderBy('likes.updated_at', 'desc')
-                    ->get();
+        $likes = DB::table('articles')
+                    ->select('articles.id', 'articles.title', 'articles.content', DB::raw('COUNT(likes.article_id) AS like_count'))
+                    ->leftJoin('likes', 'articles.id', '=', 'likes.article_id')
+                    ->whereIn('articles.id', function($query) use ($id) {
+                        $query->select('article_id')
+                            ->from('likes')
+                            ->where('user_id', $id);
+                    })
+                    ->groupBy('articles.id', 'articles.title', 'articles.content')
+                    ->paginate(10);
 
         return view('like.index',compact("id","likes"));
     }

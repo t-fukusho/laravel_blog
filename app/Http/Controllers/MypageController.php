@@ -39,18 +39,24 @@ class MypageController extends Controller
      */
     public function show($id)
     {
-        $articles = Article::select("id","title","content")
-                            ->where("user_id",$id)
-                            ->orderBy('updated_at', 'desc')
+        $articles = Article::leftJoin('likes', 'articles.id', '=', 'article_id')
+                            ->select("articles.id","title","content",DB::RAW("IF(likes.article_id,count('likes.article_id'),0) as like_count"))
+                            ->where("articles.user_id",$id)
+                            ->groupBy("articles.id")
                             ->limit(9)
                             ->get();
 
-        $likes = Like::join('articles', 'article_id', '=', 'articles.id')
-                    ->select("articles.id","articles.title","content")
-                    ->where("likes.user_id",$id)
-                    ->orderBy('likes.updated_at', 'desc')
-                    ->limit(9)
-                    ->get();
+        $likes = DB::table('articles')
+                        ->select('articles.id', 'articles.title', 'articles.content', DB::raw('COUNT(likes.article_id) AS like_count'))
+                        ->leftJoin('likes', 'articles.id', '=', 'likes.article_id')
+                        ->whereIn('articles.id', function($query) use ($id) {
+                            $query->select('article_id')
+                                ->from('likes')
+                                ->where('user_id', $id);
+                        })
+                        ->groupBy('articles.id', 'articles.title', 'articles.content')
+                        ->limit(9)
+                        ->get();
 
         return view('mypage.show',compact("id","articles","likes"));
     }

@@ -2,7 +2,7 @@ body{
     margin: 50px;
 }
 
-ul {
+.article {
     margin-right: 20px;
     width: 200px;
     flex: 0 0 auto;
@@ -38,4 +38,25 @@ li{
 .container{
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+}
+
+
+.pagination a {
+    color: #4169e1;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    border-radius: 5px;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    margin:0 auto;
 }

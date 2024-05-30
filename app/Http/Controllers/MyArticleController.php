@@ -13,12 +13,14 @@ class MyArticleController extends Controller
      */
     public function index($id)
     {
-        $articles = Article::select("id","title","content")
-                            ->where("user_id",$id)
-                            ->orderBy('updated_at', 'desc')
-                            ->get();
-
-        return view('myArticle.index',compact("id","articles"));
+        $articles = Article::leftJoin('likes', 'articles.id', '=', 'article_id')
+                            ->select("articles.id","title","content",DB::RAW("IF(likes.article_id,count('likes.article_id'),0) as like_count"))
+                            ->where("articles.user_id",$id)
+                            ->groupBy("articles.id")
+                            ->limit(9)
+                            ->paginate(10);
+        //return view('myArticle.index',compact("id","articles"));
+        return view("myArticle.index")->with('articles',$articles);
     }
 
     /**
