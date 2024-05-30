@@ -43,10 +43,11 @@
                 </label>
             </form>
             <div>
+            <h2>人気の記事</h2>
             @if ($articles->isEmpty())
                 <p>記事がありません</p>
             @else
-                <div class="Container latest-container">
+                <div class="Container">
                     <div class="Box-Container">
                         @foreach ($articles as $article)
                             <div class="box">
@@ -63,10 +64,11 @@
             @endif
             </div>
             <div>
+                <h2>新着記事</h2>
             @if ($articles->isEmpty())
                 <p>記事がありません</p>
             @else
-                <div class="Container">
+                <div class="Container latest-container">
                     <div class="Box-Container">
                         @foreach ($articles2 as $article2)
                             <div class="box">
