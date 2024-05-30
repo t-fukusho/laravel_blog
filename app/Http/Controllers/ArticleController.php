@@ -113,7 +113,7 @@ class ArticleController extends Controller
         }
 
         //いいね順
-        $articles =  $query->withCount('likes')->with('user')->paginate(10);
+        $articles =  $query->withCount('likes')->with('user')->orderBy('likes_count', 'desc')->paginate(10);
 
         //投稿順
         $articles2 =  $query2->withCount('likes')->with('user')->orderBy('created_at', 'desc')->paginate(10);
