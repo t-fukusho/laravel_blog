@@ -82,6 +82,15 @@ class ArticleController extends Controller
         $article->save();
         return redirect()->route('article.show', $article->id);
     }
+    public function destroy($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->comments()->delete();
+        $article->likes()->delete();
+        $article->delete();
+        //dd($article);
+        return redirect()->route('blog.index');
+    }
     public function commentStore(Request $request, $id)
     {
         $validatedData = $request->validate([

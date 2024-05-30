@@ -28,10 +28,15 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
+    //記事詳細
     Route::get('/blog/article/{id}', [ArticleController::class, 'show'])->name('article.show');
+    //トップページに戻る
     Route::post('/blog/article/{id}/back', [ArticleController::class, 'goBack'])->name('article.back');
+    //CRUD
     Route::post('/blog/article/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
     Route::post('/blog/article/{id}/update', [ArticleController::class, 'update'])->name('article.update');
+    Route::delete('/blog/article/{id}/delete', [ArticleController::class, 'destroy'])->name('article.destroy');
+    //いいね
     Route::post('/blog/article/{id}/like', [LikeController::class, 'store'])->name('like.store');
     Route::post('/blog/article/{id}/comment', [ArticleController::class, 'commentStore'])->name('article.commentStore');
     Route::post('/blog/create', [ArticleController::class, 'create'])->name('article.create');
