@@ -4,7 +4,8 @@
 
 <head>
     <link rel="stylesheet" href="/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
 
@@ -12,16 +13,22 @@
     <div class="row">
         <!-- サイドバー -->
         <div class="col-md-3 col-lg-2 d-md-block bg-body-tertiary p-3">
-            <a href="/blog" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">Note</span>
+            <a href="/blog"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap" />
+                </svg>
+                <span class="fs-4">Note</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 @foreach ($categories as $category)
                     <li class="nav-item">
-                        <a class="nav-link link-body-emphasis" href="{{ route('blog.index', ['category_id' => $category->id]) }}">
-                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#file"/></svg>
+                        <a class="nav-link link-body-emphasis"
+                            href="{{ route('blog.index', ['category_id' => $category->id]) }}">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#file" />
+                            </svg>
                             {{ $category->name }}
                         </a>
                     </li>
@@ -32,7 +39,8 @@
         <!-- メインコンテンツ -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div
+                class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">トップページ</h1>
                 <a href="/blog/mypage/{{ $id }}">my Page</a>
             </div>
@@ -44,46 +52,55 @@
                 </label>
             </form>
             <div>
-            <h2>人気の記事</h2>
-            @if ($articles->isEmpty())
-                <p>記事がありません</p>
-            @else
-                <div class="Container">
-                    <div class="Box-Container">
-                        @foreach ($articles as $article)
-                            <div class="box">
-                                <h2><a href="{{ route('article.show', $article->id) }}">{{ $article->title }}</a></h2>
-                                <p>{{ Str::limit($article->content, 30, '...') }}</p>
-                                <p>いいね: {{ $article->likes_count }}</p>
-                                <p>投稿者: {{ $article->user->name }}</p>
-                            </div>
-                        @endforeach
+                <h2>人気の記事</h2>
+                @if ($articles->isEmpty())
+                    <p>記事がありません</p>
+                @else
+                    <div class="Container">
+                        <div class="Box-Container">
+                            @foreach ($articles as $article)
+                                <div class="box">
+                                    <h2><a href="{{ route('article.show', $article->id) }}">{{ $article->title }}</a>
+                                    </h2>
+                                    <p>{{ Str::limit($article->content, 30, '...') }}</p>
+                                    <p>いいね: {{ $article->likes_count }}</p>
+                                    <div class="user-icon">
+                                        <p><img src="{{ $article->user->icon_path }}" alt="ユーザーアイコン">
+                                            {{ $article->user->name }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="Arrow left" onclick="scrollLeft()">&#9664;</div>
+                        <div class="Arrow right" onclick="scrollRight()">&#9654;</div>
                     </div>
-                    <div class="Arrow left" onclick="scrollLeft()">&#9664;</div>
-                    <div class="Arrow right" onclick="scrollRight()">&#9654;</div>
-                </div>
-            @endif
+                @endif
             </div>
             <div>
                 <h2>新着記事</h2>
-            @if ($articles->isEmpty())
-                <p>記事がありません</p>
-            @else
-                <div class="Container latest-container">
-                    <div class="Box-Container">
-                        @foreach ($articles2 as $article2)
-                            <div class="box">
-                                <h2><a href="{{ route('article.show', $article2->id) }}">{{ $article2->title }}</a></h2>
-                                <p>{{ Str::limit($article2->content, 30, '...') }}</p>
-                                <p>いいね: {{ $article2->likes_count }}</p>
-                                <p>投稿者: {{ $article2->user->name }}</p>
-                            </div>
-                        @endforeach
+                @if ($articles->isEmpty())
+                    <p>記事がありません</p>
+                @else
+                    <div class="Container latest-container">
+                        <div class="Box-Container">
+                            @foreach ($articles2 as $article2)
+                                <div class="box">
+                                    <h2><a
+                                            href="{{ route('article.show', $article2->id) }}">{{ $article2->title }}</a>
+                                    </h2>
+                                    <p>{{ Str::limit($article2->content, 30, '...') }}</p>
+                                    <p>いいね: {{ $article2->likes_count }}</p>
+                                    <div class="user-icon">
+                                        <p><img src="{{ $article2->user->icon_path }}" alt="ユーザーアイコン">
+                                            {{ $article2->user->name }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="Arrow left" onclick="scrollLeft()">&#9664;</div>
+                        <div class="Arrow right" onclick="scrollRight()">&#9654;</div>
                     </div>
-                    <div class="Arrow left" onclick="scrollLeft()">&#9664;</div>
-                    <div class="Arrow right" onclick="scrollRight()">&#9654;</div>
-                </div>
-            @endif
+                @endif
             </div>
             <a href="{{ route('blog.create') }}" class="btn btn-primary">投稿</a>
         </main>
@@ -91,7 +108,3 @@
     </div>
 </div>
 <script src="{{ asset('/js/scroll.js') }}"></script>
-
-
-
-

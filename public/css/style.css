@@ -119,11 +119,7 @@
     margin: 20px;
 }
 
-.box {
-    border: 1px solid #ddd;
 
-    border-radius: 5px;
-}
 
 
 
@@ -150,3 +146,16 @@ main {
     outline: 0;
 }
 
+h2{
+    font-weight: bold;
+}
+.user-icon {
+
+    margin-bottom: 20px;
+}
+
+.user-icon img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
