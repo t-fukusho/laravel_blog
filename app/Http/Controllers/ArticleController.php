@@ -35,31 +35,37 @@ class ArticleController extends Controller
             }
         }
     }
+    public function goBack(Request $request)
+    {
+        return redirect()->route('blog.index');
+    }
 
-    public function create()
+    public function create(Request $request)
     {
         $article = new Article();
         $user = Auth::user();
         $user_id = $user->id;
-        $article = new Article();
-
-        // Assign values to the non-nullable fields
-        $article->title = ''; // or any default title
-        $article->content = ''; // or any default content
+        // Create a new article instance
+        $article->title = '';
+        $article->content = '';
         $article->user_id = $user_id;
         $article->category_id = 1;
-        $article->save();
         return view('article.create', compact('article'));
     }
-    public function createUpdate(Request $request, string $id = null)
-    {
-        //dd($request);
-        $article = Article::findOrFail($id);
+
+    public function createUpdate(Request $request){
+        $user = Auth::user();
+        $user_id = $user->id;
+        $article = new Article();
+        $article->user_id = $user_id;
         $article->title = $request->input('title');
         $article->content = $request->input('content');
-        $article->content = $request->input('category');
+        $article->category_id = $request->input('category_id');
+
         $article->save();
-        return redirect()->route('article.show', $article->id);
+
+        // Redirect to the desired route after the update operation
+        return redirect()->route('blog.index');
     }
 
     public function edit(string $id = null)
@@ -81,8 +87,6 @@ class ArticleController extends Controller
         $validatedData = $request->validate([
             'comment' => 'required|string|max:255', // Adjust validation rules as needed
         ]);
-
-        // Create a new comment instance
         $comment = new Comment();
         $comment->article_id = $id;
         $comment->user_id = auth()->id(); // Assuming you are using Laravel's authentication

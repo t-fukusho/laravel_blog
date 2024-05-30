@@ -1,7 +1,12 @@
 <h1>resources/views/article/show.blade.php</h1>
+<form action="{{ route('article.back', ['id' => $article->id]) }}" method="POST">
+    <button type="submit" class="btn btn-primary">戻る</button>
+    @csrf
+</form>
 <div class="article">
     <h1>{{ $article->title }}</h1>
     <p>{{ $article->content }}</p>
+    <p>カテゴリ：{{ $article->category_id }}</p>
     <p>投稿日: {{ $article->created_at}}</p>
     <p>更新日: {{ $article->updated_at}}</p>
 </div>
