@@ -31,7 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/blog/article/{id}', [ArticleController::class, 'show'])->name('article.show');
     Route::post('/blog/article/{id}/edit', [ArticleController::class, 'edit'])->name('article.edit');
     Route::post('/blog/article/{id}/update', [ArticleController::class, 'update'])->name('article.update');
-    Route::post('/blog/article/{id}', [ArticleController::class, 'like'])->name('article.like');
+    Route::post('/blog/article/{id}/like', [LikeController::class, 'store'])->name('like.store');
+    Route::post('/blog/article/{id}/comment', [ArticleController::class, 'commentStore'])->name('article.commentStore');
+    Route::post('/blog/create', [ArticleController::class, 'create'])->name('article.create');
+    Route::post('/blog/create/update', [ArticleController::class, 'createUpdate'])->name('article.createupdate');
 });
 Route::middleware('auth')->group(function () {
     Route::resource('blog', ArticleController::class);

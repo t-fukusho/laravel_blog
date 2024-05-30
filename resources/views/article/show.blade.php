@@ -9,7 +9,7 @@
     <button type="submit" class="btn btn-primary">編集</button>
     @csrf
 </form>
-<form action="{{ route('article.like', ['id' => $article->id]) }}" method="POST">
+<form action="{{ route('like.store', ['id' => $article->id]) }}" method="POST">
     <button type="submit" class="btn btn-primary">いいね</button>
     @csrf
 </form>
@@ -30,13 +30,10 @@
         <p>コメントなし</p>
     @endif
 </div>
-<form action="" method="POST">
-    <div class="comment-box">
-        <h3>コメント</h3>
-        <div class="form-group">
-            <textarea class="form-control" rows="3" placeholder="コメント入力"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">送信</button>
-    </div>
+<form action="{{ route('article.commentStore', ['id' => $article->id]) }}" method="POST">
     @csrf
+    <div class="form-group">
+        <textarea class="form-control" name="comment" rows="3" placeholder="コメント入力してください"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
