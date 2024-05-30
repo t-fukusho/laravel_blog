@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\User;
 use App\Models\Like;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,8 @@ class ArticleController extends Controller
 {
 
     public function show(Request $request, string $id = null){
+        $user = Auth::user();
+        $user_id = $user->id;
         $articles = Article::where('is_variable', true)->get();
         if ($request->has('show')) {
             $showTerm = $request->input('show');
@@ -25,15 +28,36 @@ class ArticleController extends Controller
         else{
             $article = Article::find($id); // Assuming $showTerm contains the ID of the article
             if ($article) {
-                return view('article.show', compact('article'));
+                return view('article.show', compact('article','user_id'));
             } else {
                 abort(404); // Article not found
             }
         }
     }
 
-    public function create(Request $request){
-        return view('article.create');
+    public function create()
+    {
+        $article = new Article();
+        $user = Auth::user();
+        $user_id = $user->id;
+        $article = new Article();
+
+        // Assign values to the non-nullable fields
+        $article->title = ''; // or any default title
+        $article->content = ''; // or any default content
+        $article->user_id = $user_id;
+        $article->category_id = 1;
+        $article->save();
+        return view('article.create', compact('article'));
+    }
+    public function createUpdate(Request $request,string $id = null){
+        //dd($request);
+        $article = Article::findOrFail($id);
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->content = $request->input('category');
+        $article->save();
+        return redirect()->route('article.show', $article->id);
     }
 
     public function edit(string $id = null)
@@ -50,20 +74,20 @@ class ArticleController extends Controller
         $article->save();
         return redirect()->route('article.show', $article->id);
     }
-    public function like(string $id)
-        {
-            $user = Auth::user();
-            $user_id = $user->id;
-            $like = new Like();
-            $like->user_id = $user_id;
-            $like->article_id = $id;
-            $like->save();
+    public function commentStore(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'comment' => 'required|string|max:255', // Adjust validation rules as needed
+        ]);
 
-            $article = Article::findOrFail($id);
-
-            return view('article.show',compact('article'));
-        }
-
+        // Create a new comment instance
+        $comment = new Comment();
+        $comment->article_id = $id;
+        $comment->user_id = auth()->id(); // Assuming you are using Laravel's authentication
+        $comment->comment = $validatedData['comment'];
+        $comment->save();
+        return redirect()->route('article.show', $id);
+    }
     //
     /**
      * Display a listing of the resource.

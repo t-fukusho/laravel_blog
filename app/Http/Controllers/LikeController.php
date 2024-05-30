@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Like;
+use App\Models\Article;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,9 +36,18 @@ class LikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id = null)
     {
-        //
+        $user = Auth::user();
+        $user_id = $user->id;
+        $like = new Like();
+        $like->user_id = $user_id;
+        $like->article_id = $id;
+        $like->save();
+
+        $article = Article::findOrFail($id);
+
+        return redirect()->route('article.show', $article->id);
     }
 
     /**
