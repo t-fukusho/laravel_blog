@@ -46,7 +46,7 @@
             @if ($articles->isEmpty())
                 <p>記事がありません</p>
             @else
-                <div class="Container">
+                <div class="Container latest-container">
                     <div class="Box-Container">
                         @foreach ($articles as $article)
                             <div class="box">

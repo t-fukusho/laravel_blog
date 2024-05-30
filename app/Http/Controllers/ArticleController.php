@@ -103,18 +103,16 @@ class ArticleController extends Controller
             $query2->where('category_id', $request->category_id);
         } else if (isset($request->keyword)) {
             $query->where('title', 'like', '%' . $request->keyword . '%')
-                ->orWhere('content', 'like', '%' . $request->keyword . '%')
-                ->withCount('likes');;
+                ->orWhere('content', 'like', '%' . $request->keyword . '%');;
             $query2->where('title', 'like', '%' . $request->keyword . '%')
-                ->orWhere('content', 'like', '%' . $request->keyword . '%')
-                ->withCount('likes');;
+                ->orWhere('content', 'like', '%' . $request->keyword . '%');;
         }
 
         //いいね順
-        $articles =  $query->with('user')->paginate(10);
+        $articles =  $query->withCount('likes')->with('user')->paginate(10);
 
         //投稿順
-        $articles2 =  $query2->with('user')->orderBy('created_at', 'desc')->paginate(10);
+        $articles2 =  $query2->withCount('likes')->with('user')->orderBy('created_at', 'desc')->paginate(10);
 
         $id = Auth::id();
         $categories = Category::all();
