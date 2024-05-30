@@ -17,7 +17,7 @@ class LikeController extends Controller
     public function index($id)
     {
         $likes = Like::join('articles', 'article_id', '=', 'articles.id')
-                    ->select("articles.id","articles.title", DB::Raw("SUBSTRING(articles.content, 1, 10) as content"))
+                    ->select("articles.id","articles.title","content")
                     ->where("likes.user_id",$id)
                     ->orderBy('likes.updated_at', 'desc')
                     ->get();

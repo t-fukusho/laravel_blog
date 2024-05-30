@@ -13,7 +13,7 @@ class MyArticleController extends Controller
      */
     public function index($id)
     {
-        $articles = Article::select("id","title",DB::Raw("SUBSTRING(content, 1, 10) as content"))
+        $articles = Article::select("id","title","content")
                             ->where("user_id",$id)
                             ->orderBy('updated_at', 'desc')
                             ->get();
