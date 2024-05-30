@@ -49,4 +49,5 @@
         {{-- 削除ボタン --}}
         <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除しますか？')">アカウント削除</button>
     </form>
+    <div> <a href="/blog/">トップページに戻る</div>
 </div>
