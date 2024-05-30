@@ -38,7 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/blog/article/{id}/delete', [ArticleController::class, 'destroy'])->name('article.destroy');
     //いいね
     Route::post('/blog/article/{id}/like', [LikeController::class, 'store'])->name('like.store');
+    //コメント
     Route::post('/blog/article/{id}/comment', [ArticleController::class, 'commentStore'])->name('article.commentStore');
+    //新記事
     Route::post('/blog/create', [ArticleController::class, 'create'])->name('article.create');
     Route::post('/blog/create/update', [ArticleController::class, 'createUpdate'])->name('article.createupdate');
 });
