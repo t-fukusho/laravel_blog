@@ -5,7 +5,7 @@
 <div class="flex">
         @foreach ($likes as $like)
         <ul>
-            <li><a href="/blog/article/{{ $like->id }}">{{ $like->title }}</a></li>
+            <li><a href="/blog/article/{{ $like->id }}" class="link">{{ $like->title }}</a></li>
             <li>{{ $like->content }}</li>
         </ul>
     @endforeach

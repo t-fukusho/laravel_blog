@@ -5,7 +5,7 @@
 <div class="flex">
     @foreach ($articles as $article)
         <ul>
-            <li><a href="/blog/article/{{ $article->id }}">{{ $article->title }}</a></li>
+            <li><a href="/blog/article/{{ $article->id }}" class="link">{{ $article->title }}</a></li>
             <li>{{ $article->content }}</li>
         </ul>
     @endforeach
