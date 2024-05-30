@@ -14,7 +14,7 @@
         <div class="col-md-3 col-lg-2 d-md-block bg-body-tertiary p-3">
             <a href="/blog" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">トップページ</span>
+            <span class="fs-4">Note</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
@@ -42,17 +42,18 @@
                     <input type="text" name="keyword" placeholder="検索" value="{{ request('keyword') }}">
                 </label>
             </form>
-
+            <div>
             @if ($articles->isEmpty())
                 <p>記事がありません</p>
             @else
-                <div class="Container">
+                <div class="Container latest-container">
                     <div class="Box-Container">
                         @foreach ($articles as $article)
                             <div class="box">
                                 <h2><a href="{{ route('article.show', $article->id) }}">{{ $article->title }}</a></h2>
                                 <p>{{ Str::limit($article->content, 30, '...') }}</p>
                                 <p>いいね: {{ $article->likes_count }}</p>
+                                <p>投稿者: {{ $article->user->name }}</p>
                             </div>
                         @endforeach
                     </div>
@@ -60,7 +61,27 @@
                     <div class="Arrow right" onclick="scrollRight()">&#9654;</div>
                 </div>
             @endif
-
+            </div>
+            <div>
+            @if ($articles->isEmpty())
+                <p>記事がありません</p>
+            @else
+                <div class="Container">
+                    <div class="Box-Container">
+                        @foreach ($articles2 as $article2)
+                            <div class="box">
+                                <h2><a href="{{ route('article.show', $article2->id) }}">{{ $article2->title }}</a></h2>
+                                <p>{{ Str::limit($article2->content, 30, '...') }}</p>
+                                <p>いいね: {{ $article2->likes_count }}</p>
+                                <p>投稿者: {{ $article2->user->name }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="Arrow left" onclick="scrollLeft()">&#9664;</div>
+                    <div class="Arrow right" onclick="scrollRight()">&#9654;</div>
+                </div>
+            @endif
+            </div>
             <a href="{{ route('blog.create') }}" class="btn btn-primary">投稿</a>
         </main>
 
