@@ -63,10 +63,9 @@
                                     <h2><a href="{{ route('article.show', $article->id) }}">{{ $article->title }}</a>
                                     </h2>
                                     <p>{{ Str::limit($article->content, 30, '...') }}</p>
-                                    <p>いいね: {{ $article->likes_count }}</p>
                                     <div class="user-icon">
                                         <p><img src="{{ $article->user->icon_path }}" alt="ユーザーアイコン">
-                                            {{ $article->user->name }}</p>
+                                            {{ $article->user->name }} ⭐️{{ $article->likes_count }}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -89,10 +88,9 @@
                                             href="{{ route('article.show', $article2->id) }}">{{ $article2->title }}</a>
                                     </h2>
                                     <p>{{ Str::limit($article2->content, 30, '...') }}</p>
-                                    <p>いいね: {{ $article2->likes_count }}</p>
                                     <div class="user-icon">
                                         <p><img src="{{ $article2->user->icon_path }}" alt="ユーザーアイコン">
-                                            {{ $article2->user->name }}</p>
+                                            {{ $article2->user->name }}　⭐️{{ $article2->likes_count }}</p>
                                     </div>
                                 </div>
                             @endforeach
