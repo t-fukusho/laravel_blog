@@ -45,16 +45,6 @@ li{
     align-items: center;
 }
 
-
-.pagination a {
-    color: #4169e1;
-    border-radius: 5px;
-}
-
-.pagination a.active {
-    border-radius: 5px;
-}
-
 nav{
     display: flex;
     justify-content: center;
@@ -69,3 +59,30 @@ img{
     top: 5px;
 }
 
+.page-item.active{
+    background-color: #d4cfd4bb;
+    border-radius: 5px;
+    color: white;
+}
+
+.page-item:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.page-item{
+    font-size: 20px;
+    margin: 5px;
+    width: 25px;
+    height: 30px;
+    text-align: center;
+}
+
+a {
+    color: #0000ff;
+    text-decoration: none;
+    display: block;
+}
+
+a:hover {
+    text-decoration: underline;
+}

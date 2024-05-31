@@ -5,7 +5,7 @@
     <h3><a href="/blog/mypage/{{$id}}">マイページ</a></h3>
 </div>
 <h3>いいねした記事</h3>
-<div class="flex">
+<div class="flex" style="justify-content: center;">
     @foreach ($likes as $like)
         <ul class="article">
             <li><a href="/blog/article/{{ $like->id }}" class="link">{{ $like->title }}</a></li>
