@@ -1,7 +1,7 @@
 <div class="article-container">
     <h1>記事詳細</h1>
-    <form action="{{ route('article.back', ['id' => $article->id]) }}" method="POST">
-        <button type="submit" class="btn btn-primary">戻る</button>
+    <form id="backForm" method="POST">
+        <button type="button" class="btn btn-primary" onclick="goBack()">戻る</button>
         @csrf
     </form>
     <div class="article">
@@ -159,3 +159,22 @@
     }
 
 </style>
+<script>
+    function goBack() {
+        var previousUrl = document.referrer;
+        var previousPageWasEdit = previousUrl.endsWith('/edit');
+
+        if (previousPageWasEdit) {
+            window.history.go(-3);
+        } else {
+            window.history.go(-1);
+        }
+        setTimeout(function() {
+            window.location.reload();
+        }, 100);
+    }
+</script>
+
+
+
+

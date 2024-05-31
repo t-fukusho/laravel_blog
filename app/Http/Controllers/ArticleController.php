@@ -35,11 +35,6 @@ class ArticleController extends Controller
             }
         }
     }
-    public function goBack(Request $request)
-    {
-        return redirect()->route('blog.index');
-    }
-
     public function create(Request $request)
     {
         $article = new Article();
