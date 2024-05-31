@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('content');
             $table->boolean('is_variable')->default(true);
             $table->timestamps();
+            $table->string('thumbnail')->nullable();
         });
     }
 
