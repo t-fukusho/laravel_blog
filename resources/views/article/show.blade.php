@@ -41,7 +41,7 @@
         <ul class="list-group">
             @foreach ($article->comments as $comment)
                 <li class="list-group-item">
-                    <strong>user:{{ $comment->user_id }}</strong>
+                    <strong>{{ App\Models\User::find($comment->user_id)->name}}</strong>
                     <p>{{ $comment->comment }}</p>
                     <small>{{ $comment->created_at->diffForHumans() }}</small>
                 </li>
