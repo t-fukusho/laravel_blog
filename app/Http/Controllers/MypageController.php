@@ -40,15 +40,17 @@ class MypageController extends Controller
     public function show($id)
     {
         $articles = Article::leftJoin('likes', 'articles.id', '=', 'article_id')
-                            ->select("articles.id","title","content",DB::RAW("IF(likes.article_id,count('likes.article_id'),0) as like_count"))
+                            ->join("users","articles.user_id","=","users.id")
+                            ->select("users.name","users.icon_path","articles.id","title","content",DB::RAW("IF(likes.article_id,count('likes.article_id'),0) as like_count"))
                             ->where("articles.user_id",$id)
                             ->groupBy("articles.id")
                             ->limit(9)
                             ->get();
 
         $likes = DB::table('articles')
-                        ->select('articles.id', 'articles.title', 'articles.content', DB::raw('COUNT(likes.article_id) AS like_count'))
+                        ->select("users.name","users.icon_path",'articles.id', 'articles.title', 'articles.content', DB::raw('COUNT(likes.article_id) AS like_count'))
                         ->leftJoin('likes', 'articles.id', '=', 'likes.article_id')
+                        ->join("users","articles.user_id","=","users.id")
                         ->whereIn('articles.id', function($query) use ($id) {
                             $query->select('article_id')
                                 ->from('likes')

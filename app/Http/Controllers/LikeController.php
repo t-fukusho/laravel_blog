@@ -17,8 +17,9 @@ class LikeController extends Controller
     public function index($id)
     {
         $likes = DB::table('articles')
-                    ->select('articles.id', 'articles.title', 'articles.content', DB::raw('COUNT(likes.article_id) AS like_count'))
+                    ->select("users.name","users.icon_path",'articles.id', 'articles.title', 'articles.content', DB::raw('COUNT(likes.article_id) AS like_count'))
                     ->leftJoin('likes', 'articles.id', '=', 'likes.article_id')
+                    ->join("users","articles.user_id","=","users.id")
                     ->whereIn('articles.id', function($query) use ($id) {
                         $query->select('article_id')
                             ->from('likes')

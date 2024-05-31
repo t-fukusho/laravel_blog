@@ -2,6 +2,10 @@
     <link rel="stylesheet" href="/css/mypage.css">
 </head>
 
+<div class="container">
+    <h3><a href="/blog">TOP</a></h3>
+</div>
+
 <h1>マイページ</h1>
 
 <div class="container">
@@ -15,7 +19,10 @@
             <ul class="article">
                 <li><a href="/blog/article/{{ $article->id }}" class="link">{{ $article->title }}</a></li>
                 <li>{{ $article->content }}</li>
-                <li>&#9825;{{$article->like_count}}</li>
+                <li>
+                    <img src="{{ $article->icon_path }}" onError="this.onerror=null;this.src='https://tenman.info/labo/css/wp-content/themes/raindrops/images/image-not-found.png'">
+                    {{ $article->name }} &#9825;{{$article->like_count}}
+                </li>
             </ul>
         @endforeach
         @if (count($articles) >= 9)
@@ -33,7 +40,10 @@
             <ul class="article">
                 <li><a href="/blog/article/{{ $article->id }}" class="link">{{ $like->title }}</a></li>
                 <li>{{ $like->content }}</li>
-                <li>&#9825;{{$like->like_count}}</li>
+                <li>
+                    <img src="{{ $like->icon_path }}" onError="this.onerror=null;this.src='https://tenman.info/labo/css/wp-content/themes/raindrops/images/image-not-found.png'">
+                    {{ $like->name }} &#9825;{{$like->like_count}}
+                </li>
             </ul>
         @endforeach
         @if (count($likes) >= 9)
