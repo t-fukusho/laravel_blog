@@ -10,6 +10,14 @@
 
 <div class="container">
     <h3><a href="/blog/mypage/{{$id}}/edit">プロフィール編集</a></h3>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <x-dropdown-link :href="route('logout')"
+                onclick="event.preventDefault();
+                            this.closest('form').submit();">
+            <a>{{ __('ログアウト') }}</a>
+        </x-dropdown-link>
+    </form>
 </div>
 
 <div class="container">
