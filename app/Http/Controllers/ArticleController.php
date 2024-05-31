@@ -54,6 +54,10 @@ class ArticleController extends Controller
     }
 
     public function createUpdate(Request $request){
+        $request->validate([
+            'title' => 'required|string|max:255|min:1',
+            'content' => 'required|string|min:1',
+        ]);
         $user = Auth::user();
         $user_id = $user->id;
         $article = new Article();
