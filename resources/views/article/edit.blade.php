@@ -2,7 +2,7 @@
 <div class="article">
     <h1>編集 </h1>
     <form action="{{ route('article.update', $article) }}" method="POST">
-        <p>タイタル</p>
+        <p>タイトル</p>
         <div class="form-group">
             <textarea class="form-control" name="title" rows="1">{{ $article->title }}</textarea>
         </div>

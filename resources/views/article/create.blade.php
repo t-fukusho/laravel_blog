@@ -5,7 +5,7 @@
         @csrf
     </form>
     <form action="{{ route('article.createupdate', ['id' => $article->id]) }}" method="POST" enctype="multipart/form-data">
-        <p>タイタル</p>
+        <p>タイトル</p>
         <div class="form-group">
             <textarea class="form-control" name="title" rows="1">{{ $article->title }}</textarea>
         </div>
