@@ -1,7 +1,7 @@
 
 <div class="article">
     <h1>編集 </h1>
-    <form action="{{ route('article.update', $article) }}" method="POST">
+    <form action="{{ route('article.update', $article) }}" method="POST" enctype="multipart/form-data">
         <p>タイタル</p>
         <div class="form-group">
             <textarea class="form-control" name="title" rows="1">{{ $article->title }}</textarea>
@@ -9,6 +9,13 @@
         <p>記事コンテント</p>
         <div class="form-group">
             <textarea class="form-control" name="content" rows="8">{{ $article->content }}</textarea>
+        </div>
+        <p>サムネイル画像</p>
+        <div class="form-group">
+            <input type="file" name="thumbnail" class="form-control-file">
+            @if ($article->thumbnail)
+                <img src="{{ asset('thumbnails/' .$article->thumbnail) }}" alt="サムネイル" class="thumbnail-img">
+            @endif
         </div>
         <button type="submit" class="btn btn-primary">保存</button>
         @csrf
@@ -55,4 +62,9 @@
     .btn:hover {
         background-color: #3a5f8e; /* Slightly darker blue color on hover */
     }
+    img{
+        max-width: 60%;
+        height: 70%;
+    }
+
 </style>

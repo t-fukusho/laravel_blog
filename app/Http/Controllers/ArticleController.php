@@ -89,6 +89,13 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
         $article->title = $request->input('title');
         $article->content = $request->input('content');
+
+        if ($request->hasFile('thumbnail')) {
+            $imageName = time().'.'.$request->thumbnail->extension();
+            $request->thumbnail->move(public_path('thumbnails'), $imageName);
+            $article->thumbnail = $imageName;
+        }
+
         $article->save();
         return redirect()->route('article.show', $article->id);
     }
