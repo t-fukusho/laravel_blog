@@ -9,7 +9,7 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Category;
-
+use Illuminate\Support\Facades\Storage;
 class ArticleController extends Controller
 {
 
@@ -61,6 +61,12 @@ class ArticleController extends Controller
         $article->title = $request->input('title');
         $article->content = $request->input('content');
         $article->category_id = $request->input('category_id');
+
+        if ($request->hasFile('thumbnail')) {
+            $imageName = time().'.'.$request->thumbnail->extension();
+            $request->thumbnail->move(public_path('thumbnails'), $imageName);
+            $article->thumbnail = $imageName;
+        }
 
         $article->save();
 

@@ -4,7 +4,7 @@
         <button type="submit" class="btn btn-primary">戻る</button>
         @csrf
     </form>
-    <form action="{{ route('article.createupdate', ['id' => $article->id]) }}" method="POST">
+    <form action="{{ route('article.createupdate', ['id' => $article->id]) }}" method="POST" enctype="multipart/form-data">
         <p>タイタル</p>
         <div class="form-group">
             <textarea class="form-control" name="title" rows="1">{{ $article->title }}</textarea>
@@ -28,6 +28,12 @@
                 @endfor
             </select>
         </div>
+
+        <p>サムネイル画像</p>
+        <div class="form-group">
+            <input type="file" name="thumbnail" class="form-control-file">
+        </div>
+
         <button type="submit" class="btn btn-primary">送信</button>
         @csrf
     </form>

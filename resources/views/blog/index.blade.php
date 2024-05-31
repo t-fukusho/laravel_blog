@@ -52,7 +52,7 @@
                 </label>
             </form>
             <div>
-                <h2>人気の記事</h2>
+                <h3>人気の記事</h3>
                 @if ($articles->isEmpty())
                     <p>記事がありません</p>
                 @else
@@ -60,12 +60,19 @@
                         <div class="Box-Container">
                             @foreach ($articles as $article)
                                 <div class="box">
+
+                                    <div class="image-container">
+                                        <img src="{{ $article->thumbnail ? asset('thumbnails/' . $article->thumbnail) : 'https://picsum.photos/250/150' }}" alt="サムネイル" class="img-thumbnail">
+                                    </div>
+
+                                    <div class="text-container">
                                     <h2><a href="{{ route('article.show', $article->id) }}">{{ $article->title }}</a>
                                     </h2>
                                     <p>{{ Str::limit($article->content, 30, '...') }}</p>
                                     <div class="user-icon">
                                         <p><img src="{{ $article->user->icon_path }}" alt="ユーザーアイコン">
-                                            {{ $article->user->name }}　&#9825;{{ $article->likes_count }}</p>
+                                            {{ $article->user->name }}<br>&#9825;{{ $article->likes_count }}</p>
+                                    </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -84,15 +91,20 @@
                         <div class="Box-Container">
                             @foreach ($articles2 as $article2)
                                 <div class="box">
-                                    <h2><a
+
+                                    <div class="image-container">
+                                        <img src="{{ $article2->thumbnail ? asset('thumbnails/' . $article2->thumbnail) : 'https://picsum.photos/250/150' }}" alt="サムネイル" class="img-thumbnail">
+                                    </div>
+                                    <div class="text-container">
+                                    <h3><a
                                             href="{{ route('article.show', $article2->id) }}">{{ $article2->title }}</a>
-                                    </h2>
+                                    </h3>
                                     <p>{{ Str::limit($article2->content, 30, '...') }}</p>
                                     <div class="user-icon">
                                         <p><img src="{{ $article2->user->icon_path }}" alt="ユーザーアイコン">
-                                            {{ $article2->user->name }}　&#9825;{{ $article2->likes_count }}</p>
+                                            {{ $article2->user->name }}<br>&#9825;{{ $article2->likes_count }}</p>
                                     </div>
-                                </div>
+                                </div></div>
                             @endforeach
                         </div>
                         <div class="Arrow left" onclick="scrollLeft()">&#9664;</div>
