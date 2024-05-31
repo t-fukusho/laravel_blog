@@ -1,6 +1,6 @@
-<h1>編集</h1>
+
 <div class="article">
-    <h1>{{ $article->title }}</h1>
+    <h1>編集 </h1>
     <form action="{{ route('article.update', $article) }}" method="POST">
         <p>タイタル</p>
         <div class="form-group">
@@ -24,10 +24,8 @@
     }
 
     .article h1 {
-        margin-top: 0;
-    }
-    .article h1 {
         font-size: 24px;
+        background-color: #cfe2f3;
         margin-top: 0;
         margin-bottom: 10px;
     }
