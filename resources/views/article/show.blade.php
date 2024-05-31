@@ -169,6 +169,9 @@
         } else {
             window.history.go(-1);
         }
+        setTimeout(function() {
+            window.location.reload();
+        }, 100);
     }
 </script>
 
