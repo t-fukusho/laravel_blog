@@ -1,7 +1,7 @@
 <div class="article">
     <h1>新規投稿</h1>
-    <form action="{{ route('article.back', ['id' => 0]) }}" method="POST">
-        <button type="submit" class="btn btn-primary">戻る</button>
+    <form id="backForm" method="POST">
+        <button type="button" class="btn btn-primary" onclick="goBack()">戻る</button>
         @csrf
     </form>
     <form action="{{ route('article.createupdate', ['id' => $article->id]) }}" method="POST" enctype="multipart/form-data">
@@ -98,3 +98,8 @@
 
 
 </style>
+<script>
+    function goBack() {
+            window.history.back();
+    }
+</script>
