@@ -22,7 +22,6 @@ class MyProfileController extends Controller
     // プロフィール情報を更新するためのメソッド
     public function update(Request $request, $id)
     {
-
         // バリデーションルールの定義
         if ($request->password != null) {
             $request->validate([
@@ -35,17 +34,20 @@ class MyProfileController extends Controller
             ]);
         }
         $user = User::findOrFail($id);
-        // dd($user);
+        // dd($request);
 
         //passwordと名前の変更処理
         $user->update([
             'name' => $request->name,
             // パスワードが入力された場合のみ更新
             'password' => $request->password ? Hash::make($request->password) : $user->password,
-
         ]);
 
-        return redirect()->route('myprofile.edit', $id)->with('success', 'プロフィールが更新されました。');
+        if ($request->password != null) {
+            return redirect()->route('myprofile.edit', $id)->with('flashSuccess', 'パスワードが更新されました。');
+        } else {
+            return redirect()->route('myprofile.edit', $id)->with('flashSuccess', '名前が更新されました。');
+        }
     }
     public function icon_update(Request $request, $id)
     {
@@ -58,7 +60,7 @@ class MyProfileController extends Controller
         }
         // dd($user);
         $user->save();
-        return redirect()->route('myprofile.edit', $id)->with('success', 'プロフィールアイコンが更新されました。');
+        return redirect()->route('myprofile.edit', $id)->with('flushSuccess', 'アイコンが更新されました。');
     }
 
     // アカウントを削除するためのメソッド

@@ -8,6 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>プロフィール編集</title>
+    {{-- Toastr.jsの読み込み --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 </head>
 <style>
     /* カスタムスタイル */
@@ -138,21 +143,37 @@
         <h1>プロフィール編集</h1>
 
         {{-- 成功メッセージの表示 --}}
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-center" // フラッシュメッセージを中央に表示
+            }
+
+            @if (Session::has('flashSuccess'))
+                toastr.success("{{ session('flashSuccess') }}");
+            @endif
+
+            @if (Session::has('flashError'))
+                toastr.error("{{ session('flashError') }}");
+            @endif
+
+            @if (Session::has('flashInfo'))
+                toastr.info("{{ session('flashInfo') }}");
+            @endif
+
+            @if (Session::has('flashWarning'))
+                toastr.warning("{{ session('flashWarning') }}");
+            @endif
+        </script>
 
         {{-- エラーメッセージの表示 --}}
         @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            @foreach ($errors->all() as $error)
+                <script>
+                    toastr.error("{{ $error }}");
+                </script>
+            @endforeach
         @endif
 
         {{-- アイコン編集セクション --}}
@@ -186,8 +207,8 @@
                 {{-- パスワード入力フィールド (任意) --}}
                 <div class="form-group">
                     <i class="fas fa-lock"></i>
-                    <input type="password" name="password" id="password" class="form-control"
-                        placeholder="パスワード (変更がある場合)">
+                    <input type="password" name="password" id="password"
+                        class="form-control"placeholder="新しいパスワード(変更がある場合)">
                 </div>
                 {{-- 更新ボタン --}}
                 <button type="submit" class="btn btn-primary">名前・パスワードを変更</button>
